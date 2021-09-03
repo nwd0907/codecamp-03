@@ -1,28 +1,36 @@
 import { useState } from 'react';
 import {
-    Error,
-    Address,
-    ButtonWrapper,
-    Contents,
-    ImageWrapper,
-    InputWrapper,
-    Label,
-    OptionWrapper,
-    Password,
-    RadioButton,
-    RadioLabel,
-    SearchButton,
-    Subject,
-    SubmitButton,
-    Title,
-    UploadButton,
-    Wrapper,
-    Writer,
-    WriterWrapper,
-    Youtube,
-    Zipcode,
-    ZipcodeWrapper,
-  } from '../../../styles/BoardsNew.styles';
+  Error,
+  Address,
+  ButtonWrapper,
+  Contents,
+  ImageWrapper,
+  InputWrapper,
+  Label,
+  OptionWrapper,
+  Password,
+  RadioButton,
+  RadioLabel,
+  SearchButton,
+  Subject,
+  SubmitButton,
+  Title,
+  UploadButton,
+  Wrapper,
+  Writer,
+  WriterWrapper,
+  Youtube,
+  Zipcode,
+  ZipcodeWrapper,
+} from '../../../styles/BoardsNew.styles';
+  
+export const CREATE_BOARD = gql`
+  mutation createBoard($createBoardInput: CreateBoardInput!) {
+    createBoard(createBoardInput: $createBoardInput) {
+      _id
+    }
+  }
+`;
   
   export default function BoardNewPage() {
     const [writer, setWriter] = useState('')
@@ -34,6 +42,8 @@ import {
     const [passwordError, setPasswordError] = useState('')
     const [titleError, setTitleError] = useState('')
     const [contentsError, setContentsError] = useState('')
+
+    const [createBoard] = useMutation(CREATE_BOARD);
 
     function onChangeWriter(event){
       setWriter(event.target.value)
@@ -77,7 +87,17 @@ import {
         setContentsError("내용을 입력해주세요.")
       }
       if(writer !== "" && password !== "" && title !== "" && contents !== ""){
-        alert('게시물을 등록합니다~')
+        const result = await createBoard({
+          variables: {
+            createBoardInput: {
+              writer: writer,
+              passowrd: password,
+              title: title,
+              contents: contents,
+            },
+          },
+        });
+        console.log(result.data.createBoard._id)
       }
     }
 
