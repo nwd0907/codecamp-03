@@ -23,6 +23,7 @@ import {
   Zipcode,
   ZipcodeWrapper,
 } from '../../../styles/BoardsNew.styles';
+import {useMutation, gql} from '@apollo/client'
   
 export const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -73,7 +74,7 @@ export const CREATE_BOARD = gql`
       }
     }
 
-    function onClickSubmit(){
+    async function onClickSubmit(){
       if(writer === ""){
         setWriterError("작성자를 입력해주세요.")
       }
@@ -91,7 +92,7 @@ export const CREATE_BOARD = gql`
           variables: {
             createBoardInput: {
               writer: writer,
-              passowrd: password,
+              password: password,
               title: title,
               contents: contents,
             },

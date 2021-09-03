@@ -1,5 +1,14 @@
 import { useMutation, gql } from "@apollo/client"
 
+const CREATE_BOARD = gql`
+    mutation createBoard($createBoardInput: CreateBoardInpupt!){
+        createBoard(createBoardInput: $createBoardInput){
+            _id
+        }
+    }
+`
+
+
 const CREATE_PRODUCT = gql`
     mutation createProduct($seller: String, $createProductInput: CreateProductInput!) {
         createProduct(
