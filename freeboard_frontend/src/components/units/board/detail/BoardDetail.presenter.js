@@ -33,9 +33,9 @@ export default function BoardDetailUI(props) {
         </Body>
       </CardWrapper>
       <BottomWrapper>
-        <Button>목록으로</Button>
+        <Button onClick={props.onClickMoveToList}>목록으로</Button>
         <Button>수정하기</Button>
-        <Button>삭제하기</Button>
+        <Button onClick={props.onClickDelete}>삭제하기</Button>
       </BottomWrapper>
     </Wrapper>
   );
