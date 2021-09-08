@@ -26,7 +26,7 @@ import {
 export default function BoardWriteUI(props) {
   return (
     <Wrapper>
-        <Title>게시판 등록</Title>
+        <Title>{props.isEdit ? "게시판 수정" : "게시판 등록"}</Title>
         <WriterWrapper>
           <InputWrapper>
             <Label>작성자</Label>
@@ -115,9 +115,16 @@ export default function BoardWriteUI(props) {
           <RadioLabel htmlFor="image">사진</RadioLabel>
         </OptionWrapper>
         <ButtonWrapper>
-          <SubmitButton onClick={props.onClickSubmit} isActive={props.isActive} disabled={!props.isActive}>
-            등록하기
-          </SubmitButton>
+          {!props.isEdit && (
+            <SubmitButton onClick={props.onClickSubmit} isActive={props.isActive} disabled={!props.isActive}>
+              등록하기
+            </SubmitButton>
+          )}
+          {props.isEdit && (
+            <SubmitButton onClick={props.onClickUpdate} isActive={true}>
+              수정하기
+            </SubmitButton>
+          )}
         </ButtonWrapper>
       </Wrapper>
   );
