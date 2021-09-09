@@ -112,15 +112,13 @@ export default function BoardWrite(props) {
         variables: {
           boardId: router.query.boardId,
           password: password,
-          updateBoardInput: {
-            title: title,
-            contents: contents,
-          },
+          updateBoardInput: { title: title, contents: contents, },
         },
       });
       router.push(`/boards/${result.data.updateBoard._id}`)
-    } catch(error){
-      console.log(error)
+    } catch(err){
+      // console.log(err.message)
+      alert(err.message)
     }
   }
 
@@ -136,6 +134,7 @@ export default function BoardWrite(props) {
       passwordError={passwordError}
       titleError={titleError}
       contentsError={contentsError}
+
       isEdit={props.isEdit}
       onClickUpdate={onClickUpdate}
     />
