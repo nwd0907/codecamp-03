@@ -67,9 +67,9 @@ export default function BoardCommentListUIItem(props) {
             <Avatar src="/images/avatar.png" />
             <MainWrapper>
               <WriterWrapper>
-                <Writer>{props.data?.writer}</Writer>
+                <Writer>{props.el?.writer}</Writer>
               </WriterWrapper>
-              <Contents>{props.data?.contents}</Contents>
+              <Contents>{props.el?.contents}</Contents>
             </MainWrapper>
             <OptionWrapper>
               <UpdateIcon
@@ -82,14 +82,14 @@ export default function BoardCommentListUIItem(props) {
               />
             </OptionWrapper>
           </FlexWrapper>
-          <DateString>{props.data?.createdAt}</DateString>
+          <DateString>{props.el?.createdAt}</DateString>
         </ItemWrapper>
       )}
       {isEdit && (
         <BoardCommentWrite
           isEdit={isEdit}
           setIsEdit={setIsEdit}
-          data={props.data}
+          el={props.el}
         />
       )}
     </>
