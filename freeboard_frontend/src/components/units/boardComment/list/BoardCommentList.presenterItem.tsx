@@ -68,6 +68,7 @@ export default function BoardCommentListUIItem(props) {
             <MainWrapper>
               <WriterWrapper>
                 <Writer>{props.el?.writer}</Writer>
+                <Star value={props.el?.rating} disabled />
               </WriterWrapper>
               <Contents>{props.el?.contents}</Contents>
             </MainWrapper>

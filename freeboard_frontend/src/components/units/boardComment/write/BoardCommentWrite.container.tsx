@@ -18,6 +18,7 @@ export default function BoardCommentWrite(props) {
   const [myWriter, setMyWriter] = useState("");
   const [myPassword, setMyPassword] = useState("");
   const [myContents, setMyContents] = useState("");
+  const [myStar, setMyStar] = useState(0);
 
   const [createBoardComment] = useMutation<
     Pick<IMutation, "createBoardComment">,
@@ -40,6 +41,10 @@ export default function BoardCommentWrite(props) {
     setMyContents(event.target.value);
   }
 
+  function onChangeStar(value) {
+    setMyStar(value);
+  }
+
   async function onClickWrite() {
     try {
       await createBoardComment({
@@ -48,7 +53,7 @@ export default function BoardCommentWrite(props) {
             writer: myWriter,
             password: myPassword,
             contents: myContents,
-            rating: 0,
+            rating: myStar,
           },
           boardId: String(router.query.boardId),
         },
@@ -99,6 +104,7 @@ export default function BoardCommentWrite(props) {
       onChangeMyWriter={onChangeMyWriter}
       onChangeMyPassword={onChangeMyPassword}
       onChangeMyContents={onChangeMyContents}
+      onChangeStar={onChangeStar}
       onClickWrite={onClickWrite}
       onClickUpdate={onClickUpdate}
       isEdit={props.isEdit}
