@@ -45,7 +45,7 @@ export default function BoardCommentListUIItem(props) {
       await deleteBoardComment({
         variables: {
           password: myPassword,
-          boardCommentId: props.data?._id,
+          boardCommentId: props.el?._id,
         },
         refetchQueries: [
           {
