@@ -19,7 +19,10 @@ import {
   LikeCount,
   DislikeIcon,
   DislikeCount,
+  LinkIcon,
+  LocationIcon,
 } from "./BoardDetail.styles";
+import { Tooltip } from "antd";
 
 export default function BoardDetailUI(props) {
   return (
@@ -33,6 +36,15 @@ export default function BoardDetailUI(props) {
               <CreatedAt>{props.data?.fetchBoard.createdAt}</CreatedAt>
             </Info>
           </AvatarWrapper>
+          <IconWrapper>
+            <LinkIcon src="/images/board/detail/link.png" />
+            <Tooltip
+              placement="topRight"
+              title={`${props.data?.fetchBoard.boardAddress?.address} ${props.data?.fetchBoard.boardAddress?.addressDetail}`}
+            >
+              <LocationIcon src="/images/board/detail/location.png" />
+            </Tooltip>
+          </IconWrapper>
         </Header>
         <Body>
           <Title>{props.data?.fetchBoard.title}</Title>

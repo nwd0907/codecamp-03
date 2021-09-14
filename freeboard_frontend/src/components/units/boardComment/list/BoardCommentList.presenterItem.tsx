@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
+import { Modal } from "antd";
 import {
   IMutation,
   IMutationDeleteBoardCommentArgs,
@@ -29,6 +30,8 @@ import {
 export default function BoardCommentListUIItem(props) {
   const router = useRouter();
   const [isEdit, setIsEdit] = useState(false);
+  const [isOpenDeleteModal, setIsOpenDeleteModal] = useState(false);
+  const [myPassword, setMyPassword] = useState("");
 
   const [deleteBoardComment] = useMutation<
     Pick<IMutation, "deleteBoardComment">,
@@ -40,7 +43,6 @@ export default function BoardCommentListUIItem(props) {
   }
 
   async function onClickDelete() {
-    const myPassword = prompt("비밀번호를 입력해 주세요.");
     try {
       await deleteBoardComment({
         variables: {
@@ -59,8 +61,22 @@ export default function BoardCommentListUIItem(props) {
     }
   }
 
+  function onClickOpenDeleteModal() {
+    setIsOpenDeleteModal(true);
+  }
+
+  function onChangeDeletePassword(event) {
+    setMyPassword(event.target.value);
+  }
+
   return (
     <>
+      {isOpenDeleteModal && (
+        <Modal visible={true} onOk={onClickDelete}>
+          <div>비밀번호 입력: </div>
+          <PasswordInput type="password" onChange={onChangeDeletePassword} />
+        </Modal>
+      )}
       {!isEdit && (
         <ItemWrapper>
           <FlexWrapper>
@@ -79,7 +95,7 @@ export default function BoardCommentListUIItem(props) {
               />
               <DeleteIcon
                 src="/images/boardComment/list/option_delete_icon.png/"
-                onClick={onClickDelete}
+                onClick={onClickOpenDeleteModal}
               />
             </OptionWrapper>
           </FlexWrapper>

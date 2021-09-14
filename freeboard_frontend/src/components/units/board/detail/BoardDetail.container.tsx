@@ -24,11 +24,6 @@ export default function BoardDetail() {
 
   function onClickMoveToEdit() {
     router.push(`/boards/${router.query.boardId}/edit`);
-
-    // router.push(`/boards/new`);
-    // router.push(`/boardEdit/${router.query.boardId}`);
-
-    // router.push(`/boards/${router.query.boardId}`);
   }
 
   async function onClickDelete() {

@@ -99,6 +99,10 @@ export const IconWrapper = styled.div`
   text-align: center;
 `;
 
+export const LinkIcon = styled.img``;
+
+export const LocationIcon = styled.img``;
+
 export const LikeIcon = styled(LikeOutlined)`
   font-size: 24px;
   color: #ffd600;

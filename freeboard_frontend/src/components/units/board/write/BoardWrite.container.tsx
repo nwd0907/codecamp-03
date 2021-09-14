@@ -8,12 +8,16 @@ import { IMyUpdateBoardInput } from "./BoardWrite.types";
 export default function BoardWrite(props) {
   const router = useRouter();
   const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [writer, setWriter] = useState("");
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [contents, setContents] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -99,6 +103,20 @@ export default function BoardWrite(props) {
     setYoutubeUrl(event.target.value);
   }
 
+  function onChangeAddressDetail(event) {
+    setAddressDetail(event.target.value);
+  }
+
+  function onClickAddressSearch() {
+    setIsOpen(true);
+  }
+
+  function onCompleteAddressSearch(data: any) {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen(false);
+  }
+
   async function onClickSubmit() {
     if (writer === "") {
       setWriterError("작성자를 입력해주세요.");
@@ -122,6 +140,11 @@ export default function BoardWrite(props) {
               title: title,
               contents: contents,
               youtubeUrl: youtubeUrl,
+              boardAddress: {
+                zipcode: zipcode,
+                address: address,
+                addressDetail: addressDetail,
+              },
             },
           },
         });
@@ -134,7 +157,14 @@ export default function BoardWrite(props) {
   }
 
   async function onClickUpdate() {
-    if (!title && !contents && !youtubeUrl) {
+    if (
+      !title &&
+      !contents &&
+      !youtubeUrl &&
+      !zipcode &&
+      !address &&
+      !addressDetail
+    ) {
       alert("수정된 내용이 없습니다.");
       return;
     }
@@ -142,6 +172,14 @@ export default function BoardWrite(props) {
     if (title) myUpdateboardInput.title = title;
     if (contents) myUpdateboardInput.contents = contents;
     if (youtubeUrl) myUpdateboardInput.youtubeUrl = youtubeUrl;
+    if (zipcode || address || addressDetail) {
+      myUpdateboardInput.boardAddress = {};
+      if (zipcode) myUpdateboardInput.boardAddress.zipcode = zipcode;
+      if (address) myUpdateboardInput.boardAddress.address = address;
+      if (addressDetail)
+        myUpdateboardInput.boardAddress.addressDetail = addressDetail;
+    }
+
     try {
       const result = await updateBoard({
         variables: {
@@ -160,19 +198,25 @@ export default function BoardWrite(props) {
   return (
     <BoardWriteUI
       isActive={isActive}
+      isOpen={isOpen}
       onChangeWriter={onChangeWriter}
       onChangePassword={onChangePassword}
       onChangeTitle={onChangeTitle}
       onChangeContents={onChangeContents}
       onChangeYoutubeUrl={onChangeYoutubeUrl}
+      onChangeAddressDetail={onChangeAddressDetail}
+      onClickAddressSearch={onClickAddressSearch}
+      onCompleteAddressSearch={onCompleteAddressSearch}
       onClickSubmit={onClickSubmit}
+      onClickUpdate={onClickUpdate}
       writerError={writerError}
       passwordError={passwordError}
       titleError={titleError}
       contentsError={contentsError}
       isEdit={props.isEdit}
       data={props.data}
-      onClickUpdate={onClickUpdate}
+      address={address}
+      zipcode={zipcode}
     />
   );
 }
