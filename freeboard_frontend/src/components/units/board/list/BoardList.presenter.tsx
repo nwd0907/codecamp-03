@@ -11,6 +11,7 @@ import {
   PencilIcon,
   Button,
 } from "./BoardList.styles";
+import Paginations01 from "../../../commons/paginations/01/Paginations01.container";
 
 export default function BoardListUI(props) {
   return (
@@ -34,6 +35,12 @@ export default function BoardListUI(props) {
       ))}
       <TableBottom />
       <Footer>
+        <Paginations01
+          refetch={props.refetch}
+          count={props.count}
+          startPage={props.startPage}
+          setStartPage={props.setStartPage}
+        />
         <Button onClick={props.onClickMoveToBoardNew}>
           <PencilIcon src="/images/board/list/write.png" />
           게시물 등록하기
