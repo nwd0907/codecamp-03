@@ -147,7 +147,7 @@ export default function BoardWriteUI(props) {
             <SubmitButton
               onClick={props.onClickSubmit}
               isActive={props.isActive}
-              disabled={!props.isActive}
+              // disabled={!props.isActive}
             >
               등록하기
             </SubmitButton>

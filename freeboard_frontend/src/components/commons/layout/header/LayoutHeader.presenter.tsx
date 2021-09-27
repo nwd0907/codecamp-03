@@ -5,7 +5,11 @@ import {
   Wrapper,
 } from "./LayoutHeader.styles";
 
-export default function LayoutHeaderUI(props) {
+interface IProps {
+  onClickLogo: () => void;
+  onClickMoveToLogin: () => void;
+}
+export default function LayoutHeaderUI(props: IProps) {
   return (
     <Wrapper>
       <InnerWrapper>

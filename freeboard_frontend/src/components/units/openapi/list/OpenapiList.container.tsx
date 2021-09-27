@@ -7,6 +7,7 @@ export default function OpenapiList() {
 
   useEffect(() => {
     const getImg = async () => {
+      // [1, 1, 1, 1, 1, 1, 1, 1, 1]
       new Array(9).fill(1).map(async (_) => {
         const result: any = await axios.get(
           "https://dog.ceo/api/breeds/image/random"

@@ -4,6 +4,17 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Layout from "../src/components/commons/layout";
 import { Global } from "@emotion/react";
 import { globalStyles } from "../src/commons/styles/globalStyles";
+import { initializeApp } from "firebase/app";
+
+export const firebaseApp = initializeApp({
+  apiKey: "AIzaSyB2AZodzgw35GmS8qlyy3Z22jFI3Du2GH8",
+  authDomain: "codecamp-01.firebaseapp.com",
+  projectId: "codecamp-01",
+  storageBucket: "codecamp-01.appspot.com",
+  messagingSenderId: "942230859112",
+  appId: "1:942230859112:web:e84fd4c9702fec4af23add",
+  measurementId: "G-KSYKS7SJCT",
+});
 
 function MyApp({ Component, pageProps }) {
   const client = new ApolloClient({

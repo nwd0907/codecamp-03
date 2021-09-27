@@ -70,6 +70,7 @@ export default function BoardCommentWrite(props) {
   }
 
   async function onClickUpdate(event) {
+    event.target.id;
     if (!myContents) {
       alert("내용이 수정되지 않았습니다.");
       return;
@@ -93,7 +94,7 @@ export default function BoardCommentWrite(props) {
           },
         ],
       });
-      props.setIsEdit?.(false);
+      // props.setIsEdit?.(false);
     } catch (error) {
       alert(error.message);
     }
@@ -109,6 +110,7 @@ export default function BoardCommentWrite(props) {
       onClickUpdate={onClickUpdate}
       isEdit={props.isEdit}
       el={props.el}
+      myContents={myContents}
     />
   );
 }

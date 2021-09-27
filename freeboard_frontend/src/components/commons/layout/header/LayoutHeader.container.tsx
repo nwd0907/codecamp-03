@@ -6,6 +6,8 @@ export default function LayoutHeader() {
 
   function onClickLogo() {
     router.push("/boards");
+
+    return "aaa";
   }
 
   function onClickMoveToLogin() {

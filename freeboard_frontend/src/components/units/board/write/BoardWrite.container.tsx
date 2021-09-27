@@ -1,9 +1,10 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { IMyUpdateBoardInput } from "./BoardWrite.types";
+import DaumPostcode, { DaumPostcodeProps } from "react-daum-postcode";
 
 export default function BoardWrite(props) {
   const router = useRouter();
@@ -159,7 +160,7 @@ export default function BoardWrite(props) {
   async function onClickUpdate() {
     if (
       !title &&
-      !contents &&
+      false &&
       !youtubeUrl &&
       !zipcode &&
       !address &&
