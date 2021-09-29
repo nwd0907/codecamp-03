@@ -21,6 +21,8 @@ import {
   DislikeCount,
   LinkIcon,
   LocationIcon,
+  Image,
+  ImageWrapper,
 } from "./BoardDetail.styles";
 import { Tooltip } from "antd";
 
@@ -48,6 +50,13 @@ export default function BoardDetailUI(props) {
         </Header>
         <Body>
           <Title>{props.data?.fetchBoard.title}</Title>
+          <ImageWrapper>
+            {props.data?.fetchBoard.images
+              ?.filter((el: string) => el !== "")
+              .map((el: string) => (
+                <Image key={el} src={`https://storage.googleapis.com/${el}`} />
+              ))}
+          </ImageWrapper>
           <Contents>{props.data?.fetchBoard.contents}</Contents>
           <Youtube
             url={props.data?.fetchBoard.youtubeUrl}

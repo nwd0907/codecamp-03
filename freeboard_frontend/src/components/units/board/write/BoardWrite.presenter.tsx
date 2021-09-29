@@ -24,6 +24,7 @@ import {
 } from "./BoardWrite.styles";
 import { Modal } from "antd";
 import DaumPostcode from "react-daum-postcode";
+import Uploads01 from "../../../commons/uploads/01/Uploads01.container";
 
 export default function BoardWriteUI(props) {
   return (
@@ -117,23 +118,14 @@ export default function BoardWriteUI(props) {
         </InputWrapper>
         <ImageWrapper>
           <Label>사진첨부</Label>
-          <UploadButton>
-            {/* <input
-              type="file"
-              style={{ display: "none" }}
-              ref={fileRef}
-            /> */}
-            <div>+</div>
-            <div>Upload</div>
-          </UploadButton>
-          <UploadButton>
-            <div>+</div>
-            <div>Upload</div>
-          </UploadButton>
-          <UploadButton>
-            <div>+</div>
-            <div>Upload</div>
-          </UploadButton>
+          {props.fileUrls.map((el, index) => (
+            <Uploads01
+              key={`${el}_${index}`}
+              index={index}
+              fileUrl={el}
+              onChangeFileUrls={props.onChangeFileUrls}
+            />
+          ))}
         </ImageWrapper>
         <OptionWrapper>
           <Label>메인설정</Label>

@@ -4,7 +4,6 @@ import { ChangeEvent, useState } from "react";
 import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { IMyUpdateBoardInput } from "./BoardWrite.types";
-import DaumPostcode, { DaumPostcodeProps } from "react-daum-postcode";
 
 export default function BoardWrite(props) {
   const router = useRouter();
@@ -19,6 +18,7 @@ export default function BoardWrite(props) {
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -146,6 +146,7 @@ export default function BoardWrite(props) {
                 address: address,
                 addressDetail: addressDetail,
               },
+              images: [...fileUrls],
             },
           },
         });
@@ -196,6 +197,13 @@ export default function BoardWrite(props) {
     }
   }
 
+  function onChangeFileUrls(fileUrl: string, index: number) {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    console.log(newFileUrls);
+    setFileUrls(newFileUrls);
+  }
+
   return (
     <BoardWriteUI
       isActive={isActive}
@@ -208,6 +216,7 @@ export default function BoardWrite(props) {
       onChangeAddressDetail={onChangeAddressDetail}
       onClickAddressSearch={onClickAddressSearch}
       onCompleteAddressSearch={onCompleteAddressSearch}
+      onChangeFileUrls={onChangeFileUrls}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
       writerError={writerError}
@@ -218,6 +227,7 @@ export default function BoardWrite(props) {
       data={props.data}
       address={address}
       zipcode={zipcode}
+      fileUrls={fileUrls}
     />
   );
 }
