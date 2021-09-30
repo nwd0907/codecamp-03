@@ -118,7 +118,9 @@ export default function BoardWriteUI(props) {
         </InputWrapper>
         <ImageWrapper>
           <Label>사진첨부</Label>
-          {props.fileUrls.map((el, index) => (
+          {/* 
+          ////////////// 1차 이미지 실습 ///////////////////////////
+          {props.fileUrls.filter((el) => el).map((el, index) => (
             <Uploads01
               key={`${el}_${index}`}
               index={index}
@@ -126,6 +128,17 @@ export default function BoardWriteUI(props) {
               onChangeFileUrls={props.onChangeFileUrls}
             />
           ))}
+          /////////////////////////////////////////////////////// 
+          */}
+          {/* ////////////// 2차 이미지 실습 /////////////////////////// */}
+          {new Array(3).fill(1).map((el, index) => (
+            <Uploads01
+              key={`${el}_${index}`}
+              index={index}
+              onChangeFiles={props.onChangeFiles}
+            />
+          ))}
+          {/* ////////////// 2차 이미지 실습 /////////////////////////// */}
         </ImageWrapper>
         <OptionWrapper>
           <Label>메인설정</Label>

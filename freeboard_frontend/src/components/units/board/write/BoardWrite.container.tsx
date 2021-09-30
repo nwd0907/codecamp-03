@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
 import BoardWriteUI from "./BoardWrite.presenter";
-import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
+import { CREATE_BOARD, UPDATE_BOARD, UPLOAD_FILE } from "./BoardWrite.queries";
 import { IMyUpdateBoardInput } from "./BoardWrite.types";
 
 export default function BoardWrite(props) {
@@ -18,7 +18,9 @@ export default function BoardWrite(props) {
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
-  const [fileUrls, setFileUrls] = useState(["", "", ""]);
+
+  // const [fileUrls, setFileUrls] = useState(["고양이이미지.png", "", "강아지이미지.png"]); // 이미지 1차 실습
+  const [files, setFiles] = useState<(File | null)[]>([null, null, null]); // 이미지 2차 실습
 
   const [writerError, setWriterError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -27,6 +29,7 @@ export default function BoardWrite(props) {
 
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
+  const [uploadFile] = useMutation(UPLOAD_FILE);
 
   function onChangeWriter(event) {
     setWriter(event.target.value);
@@ -133,6 +136,14 @@ export default function BoardWrite(props) {
     }
     if (writer !== "" && password !== "" && title !== "" && contents !== "") {
       try {
+        ////////////////////////////////////////// 이미지 2차 실습 ///////////////////////////////////
+        const uploadFiles = files // [File1, File2, ""]
+          .filter((el) => el) // [File1, File2]
+          .map((el) => uploadFile({ variables: { file: el } })); // [ uploadFile({ variables: { file: File1 } }), uploadFile({ variables: { file: File2 } }) ]
+        const results = await Promise.all(uploadFiles); // await Promise.all([ uploadFile({ variables: { file: File1 } }), uploadFile({ variables: { file: File2 } }) ])
+        const myImages = results.map((el) => el.data.uploadFile.url); // ["강아지이미지.png", "고양이이미지.png"]
+        ///////////////////////////////////////////////////////////////////////////////////////////
+
         const result = await createBoard({
           variables: {
             createBoardInput: {
@@ -146,7 +157,8 @@ export default function BoardWrite(props) {
                 address: address,
                 addressDetail: addressDetail,
               },
-              images: [...fileUrls],
+              // images: [...fileUrls], // 이미지 1차 실습
+              images: myImages, // 이미지 2차 실습
             },
           },
         });
@@ -197,12 +209,21 @@ export default function BoardWrite(props) {
     }
   }
 
-  function onChangeFileUrls(fileUrl: string, index: number) {
-    const newFileUrls = [...fileUrls];
-    newFileUrls[index] = fileUrl;
-    console.log(newFileUrls);
-    setFileUrls(newFileUrls);
+  //////////////////// 이미지 1차 실습 /////////////////////////////////
+  // function onChangeFileUrls(fileUrl: string, index: number) {
+  //   const newFileUrls = [...fileUrls];    // ["고양이이미지.png", "", ""]
+  //   newFileUrls[index] = fileUrl          // ["고양이이미지.png", "", "강아지이미지.png"]
+  //   setFileUrls(newFileUrls);
+  // }
+  ///////////////////////////////////////////////////////////////////
+
+  //////////////////// 이미지 2차 실습 /////////////////////////////////
+  function onChangeFiles(file: File, index: number) {
+    const newFiles = [...files];
+    newFiles[index] = file;
+    setFiles(newFiles);
   }
+  ///////////////////////////////////////////////////////////////////
 
   return (
     <BoardWriteUI
@@ -216,7 +237,6 @@ export default function BoardWrite(props) {
       onChangeAddressDetail={onChangeAddressDetail}
       onClickAddressSearch={onClickAddressSearch}
       onCompleteAddressSearch={onCompleteAddressSearch}
-      onChangeFileUrls={onChangeFileUrls}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
       writerError={writerError}
@@ -227,7 +247,14 @@ export default function BoardWrite(props) {
       data={props.data}
       address={address}
       zipcode={zipcode}
-      fileUrls={fileUrls}
+      //////////////////// 이미지 1차 실습 /////////////////////
+      // fileUrls={fileUrls}
+      // onChangeFileUrls={onChangeFileUrls}
+      //////////////////////////////////////////////////////
+
+      //////////////////// 이미지 2차 실습 ////////////////////
+      onChangeFiles={onChangeFiles}
+      /////////////////////////////////////////////////////
     />
   );
 }

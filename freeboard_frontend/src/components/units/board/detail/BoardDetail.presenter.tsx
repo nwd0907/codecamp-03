@@ -51,8 +51,8 @@ export default function BoardDetailUI(props) {
         <Body>
           <Title>{props.data?.fetchBoard.title}</Title>
           <ImageWrapper>
-            {props.data?.fetchBoard.images
-              ?.filter((el: string) => el !== "")
+            {props.data?.fetchBoard.images // ["고양이이미지.png", "강아지이미지.png"]     ""  " "
+              ?.filter((el: string) => el) // ["고양이이미지.png", "강아지이미지.png"]
               .map((el: string) => (
                 <Image key={el} src={`https://storage.googleapis.com/${el}`} />
               ))}
