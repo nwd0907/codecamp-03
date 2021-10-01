@@ -192,6 +192,8 @@ export default function BoardWrite(props) {
         myUpdateboardInput.boardAddress.addressDetail = addressDetail;
     }
 
+    // 1. props.data?.fetchBoard.images // ["토끼이미지.png", "", "거북이이미지.png"]
+    // 2. files // [File1, File2, null] // File1: 강아지이미지파일, File2: 고양이이미지파일
     ////////////////////////////////////////// 이미지 2차 실습 ///////////////////////////////////
     const uploadFiles = files // [File1, File2, null]
       .map((el) => (el ? uploadFile({ variables: { file: el } }) : null)); // [ uploadFile({ variables: { file: File1 } }), uploadFile({ variables: { file: File2 } }), null ]
@@ -200,6 +202,9 @@ export default function BoardWrite(props) {
     myUpdateboardInput.images = nextImages;
     ///////////////////////////////////////////////////////////////////////////////////////////
 
+    // 1. props.data?.fetchBoard.images // ["토끼이미지.png"  , "",              "거북이이미지.png"]
+    // 2. nextImages                    // ["강아지이미지.png",  "고양이이미지.png", ""             ]
+    // 3. myImages                      // ["강아지이미지.png",  "고양이이미지.png", "거북이이미지.png"]
     ////////////////////////////////////////// 이미지 수정 ///////////////////////////////////
     if (props.data?.fetchBoard.images?.length) {
       const prevImages = [...props.data?.fetchBoard.images]; // ["토끼이미지.png", "", "거북이이미지.png"]
