@@ -20,11 +20,11 @@ import {
   Youtube,
   Zipcode,
   ZipcodeWrapper,
-  UploadButton,
 } from "./BoardWrite.styles";
 import { Modal } from "antd";
 import DaumPostcode from "react-daum-postcode";
 import Uploads01 from "../../../commons/uploads/01/Uploads01.container";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardWriteUI(props) {
   return (
@@ -136,6 +136,7 @@ export default function BoardWriteUI(props) {
               key={`${el}_${index}`}
               index={index}
               onChangeFiles={props.onChangeFiles}
+              defaultFileUrl={props.data?.fetchBoard.images?.[index]}
             />
           ))}
           {/* ////////////// 2차 이미지 실습 /////////////////////////// */}

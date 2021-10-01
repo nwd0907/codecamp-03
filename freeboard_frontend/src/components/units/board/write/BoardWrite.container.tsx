@@ -137,11 +137,10 @@ export default function BoardWrite(props) {
     if (writer !== "" && password !== "" && title !== "" && contents !== "") {
       try {
         ////////////////////////////////////////// 이미지 2차 실습 ///////////////////////////////////
-        const uploadFiles = files // [File1, File2, ""]
-          .filter((el) => el) // [File1, File2]
-          .map((el) => uploadFile({ variables: { file: el } })); // [ uploadFile({ variables: { file: File1 } }), uploadFile({ variables: { file: File2 } }) ]
-        const results = await Promise.all(uploadFiles); // await Promise.all([ uploadFile({ variables: { file: File1 } }), uploadFile({ variables: { file: File2 } }) ])
-        const myImages = results.map((el) => el.data.uploadFile.url); // ["강아지이미지.png", "고양이이미지.png"]
+        const uploadFiles = files // [File1, File2, null]
+          .map((el) => (el ? uploadFile({ variables: { file: el } }) : null)); // [ uploadFile({ variables: { file: File1 } }), uploadFile({ variables: { file: File2 } }), null ]
+        const results = await Promise.all(uploadFiles); // await Promise.all([ uploadFile({ variables: { file: File1 } }), uploadFile({ variables: { file: File2 } }), null ])
+        const myImages = results.map((el) => el?.data.uploadFile.url || ""); // ["강아지이미지.png", "고양이이미지.png", ""]
         ///////////////////////////////////////////////////////////////////////////////////////////
 
         const result = await createBoard({
@@ -162,7 +161,6 @@ export default function BoardWrite(props) {
             },
           },
         });
-        // console.log(result.data.createBoard._id)
         router.push(`/boards/${result.data.createBoard._id}`);
       } catch (error) {
         console.log(error);
@@ -193,6 +191,23 @@ export default function BoardWrite(props) {
       if (addressDetail)
         myUpdateboardInput.boardAddress.addressDetail = addressDetail;
     }
+
+    ////////////////////////////////////////// 이미지 2차 실습 ///////////////////////////////////
+    const uploadFiles = files // [File1, File2, null]
+      .map((el) => (el ? uploadFile({ variables: { file: el } }) : null)); // [ uploadFile({ variables: { file: File1 } }), uploadFile({ variables: { file: File2 } }), null ]
+    const results = await Promise.all(uploadFiles); // await Promise.all([ uploadFile({ variables: { file: File1 } }), uploadFile({ variables: { file: File2 } }), null ])
+    const nextImages = results.map((el) => el?.data.uploadFile.url || ""); // ["강아지이미지.png", "고양이이미지.png", ""]
+    myUpdateboardInput.images = nextImages;
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////////////// 이미지 수정 ///////////////////////////////////
+    if (props.data?.fetchBoard.images?.length) {
+      const prevImages = [...props.data?.fetchBoard.images]; // ["토끼이미지.png", "", "거북이이미지.png"]
+      myUpdateboardInput.images = prevImages.map((el, index) => nextImages[index] || el); // prettier-ignore
+    } else {
+      myUpdateboardInput.images = nextImages;
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////
 
     try {
       const result = await updateBoard({

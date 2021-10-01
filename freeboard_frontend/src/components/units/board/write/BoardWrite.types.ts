@@ -7,4 +7,5 @@ export interface IMyUpdateBoardInput {
     address?: string;
     addressDetail?: string;
   };
+  images?: string[];
 }
