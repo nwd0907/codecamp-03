@@ -1,7 +1,7 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export default class Board extends BaseEntity {
+export default class BoardComment extends BaseEntity {
   @PrimaryGeneratedColumn("increment") // PK
   number!: number;
 
@@ -9,7 +9,10 @@ export default class Board extends BaseEntity {
   writer!: string;
 
   @Column({ type: "text" })
-  contents!: string;
+  title!: string;
+
+  @Column({ type: "integer" })
+  age!: number;
 
   @Column({ type: "timestamp", default: null, nullable: true })
   deletedAt?: Date;
