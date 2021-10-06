@@ -14,7 +14,18 @@ const FETCH_USER_LOGGED_IN = gql`
 `;
 
 export default function LoginSuccessPage() {
-  const { setUserInfo, userInfo } = useContext(GlobalContext);
+  const { setUserInfo, userInfo, accessToken } = useContext(GlobalContext);
+
+  if (!accessToken) {
+    alert("로그인을 먼저해 주세요!!");
+
+    // 15줄...
+
+    // 15줄...
+
+    // 15줄...
+    router.push("/login");
+  }
 
   const { data } = useQuery(FETCH_USER_LOGGED_IN);
 
