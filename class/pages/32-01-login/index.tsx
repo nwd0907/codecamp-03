@@ -38,7 +38,7 @@ export default function LoginPage() {
     // localStorage.setItem("accessToken", result.data?.loginUser.accessToken);
     localStorage.setItem("refreshToken", "true");
     setAccessToken(result.data?.loginUserExample.accessToken);
-    router.push("/32-02-login-success");
+    // router.push("/32-02-login-success");
   }
 
   return (
