@@ -15,8 +15,12 @@ import {
 import Paginations01 from "../../../commons/paginations/01/Paginations01.container";
 import Searchbars01 from "../../../commons/searchbars/Searchbars01.container";
 import { v4 as uuidv4 } from "uuid";
+import { IQuery } from "../../../../commons/types/generated/types";
 
-export default function BoardListUI(props) {
+interface IBoardListUIProps {
+  data: Pick<IQuery, "fetchBoards">;
+}
+export default function BoardListUI(props: IBoardListUIProps) {
   return (
     <Wrapper>
       <Searchbars01

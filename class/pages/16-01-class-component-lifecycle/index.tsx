@@ -16,7 +16,7 @@ export default class ClassComponentLifecyclePage extends Component {
 
   componentDidMount = () => {
     console.log("컴포넌트 마운트 완료!!");
-    this.inputRef.current.focus();
+    this.inputRef.current?.focus();
   };
 
   componentDidUpdate = () => {

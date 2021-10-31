@@ -4,12 +4,12 @@ import { useRouter } from "next/router";
 export default function FunctionalComponentLifecyclePage() {
   const router = useRouter();
   const [count, setCount] = useState(0);
-  const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // componentDidMount 와 동일
   useEffect(() => {
     console.log("컴포넌트 마운트 완료!!");
-    inputRef.current.focus();
+    inputRef.current?.focus();
 
     // componentWillUnmount 와 동일
     return () => {

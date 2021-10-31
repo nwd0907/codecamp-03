@@ -8,7 +8,7 @@ export default function LibraryStarPage() {
 
   //   const aaa = 3
 
-  const handleChange = (value) => {
+  const handleChange = (value: number) => {
     // console.log(aaa)
 
     setValue(value);
