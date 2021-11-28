@@ -1,7 +1,7 @@
 // console.log("hello world");
 import { createConnection } from "typeorm";
 import { ApolloServer, gql } from "apollo-server";
-import Board from "./Board.postgres";
+import Board from "./Board.mysql";
 
 const typeDefs = gql`
   input CreateBoardInput {
@@ -81,7 +81,7 @@ const resolvers = {
     deleteBoard: async () => {
       // await Board.delete({ number: 4 });
 
-      await Board.update({ number: 5 }, { deletedAt: new Date() });
+      // await Board.update({ number: 5 }, { deletedAt: new Date() });
 
       return { message: "삭제완료!!" };
     },
@@ -94,13 +94,13 @@ const server = new ApolloServer({
 });
 
 createConnection({
-  type: "postgres",
-  database: "postgres",
-  username: "postgres",
-  password: "postgres2021",
-  port: 5001,
-  host: "34.64.221.225",
-  entities: [__dirname + "/*.postgres.ts"],
+  type: "mysql",
+  database: "mysql",
+  username: "root",
+  password: "codecamp",
+  port: 3308,
+  host: "34.64.207.239",
+  entities: [__dirname + "/*.mysql.ts"],
   logging: true,
   synchronize: true,
 })

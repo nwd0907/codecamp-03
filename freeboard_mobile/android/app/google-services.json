@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "917648282533",
+    "project_id": "codecamp-03-preview",
+    "storage_bucket": "codecamp-03-preview.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:917648282533:android:d4e0c957d90d6929f28e4c",
+        "android_client_info": {
+          "package_name": "com.freeboard_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "917648282533-8kpbhgrtd4hphg9apbhtpt3eomunovks.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freeboard_mobile",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "917648282533-8ug5cqvv8pmfifg4b5qhhi2lqru5uner.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4XRVMCmnUJqDiOYz8xt11c3NAWvzMlkE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "917648282533-8ug5cqvv8pmfifg4b5qhhi2lqru5uner.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

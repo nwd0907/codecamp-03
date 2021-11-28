@@ -5,9 +5,12 @@ export default function MarketsPage(props) {
   return (
     <>
       <Head>
-        <meta property="og:title" content={props.fetchUseditem.name} />
-        <meta property="og:description" content={props.fetchUseditem.remarks} />
-        <meta property="og:image" content={props.fetchUseditem.images[0]} />
+        <meta property="og:title" content={props?.fetchUseditem?.name} />
+        <meta
+          property="og:description"
+          content={props?.fetchUseditem?.remarks}
+        />
+        <meta property="og:image" content={props?.fetchUseditem?.images[0]} />
       </Head>
       <div>마켓페이지 입니다</div>
     </>

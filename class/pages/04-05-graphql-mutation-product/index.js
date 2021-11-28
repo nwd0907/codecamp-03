@@ -22,6 +22,12 @@ const CREATE_PRODUCT = gql`
 `;
 
 export default function GraphqlMutationProductPage() {
+  const seller = useSt;
+  const createMyInput = useS({
+    name: "",
+    detail: "",
+    price: 300,
+  });
   const [createProduct] = useMutation(CREATE_PRODUCT);
 
   async function onClickSubmit() {

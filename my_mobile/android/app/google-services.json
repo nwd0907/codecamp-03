@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "579334538708",
+    "project_id": "codecamp-03-c4470",
+    "storage_bucket": "codecamp-03-c4470.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579334538708:android:6d7877ec843470beebc241",
+        "android_client_info": {
+          "package_name": "com.my_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "579334538708-v5rda8ver1cn829svh5rgc82tj2gs35f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.my_mobile",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "579334538708-g4rqrh4vfl53tb3os7970qrkhr2c24j2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPp_99EXF9XY9lzxsmTzHkFKJ9hMzjvfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579334538708-g4rqrh4vfl53tb3os7970qrkhr2c24j2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

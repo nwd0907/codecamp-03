@@ -3,11 +3,6 @@ import { Modal, Button } from "antd";
 
 export default function ModalBasicPage() {
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [myPassword, setMyPassword] = useState("");
-
-  function onChangeMyPassword(event) {
-    setMyPassword(event.target.value);
-  }
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -21,7 +16,7 @@ export default function ModalBasicPage() {
     <>
       <Button onClick={showModal}>모달창 열기</Button>
       <Modal visible={isModalVisible} onCancel={closeModal}>
-        비밀번호 입력: <input type="password" onChange={onChangeMyPassword} />
+        비밀번호 입력: <input type="password" />
       </Modal>
     </>
   );

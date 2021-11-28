@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
+import { ReactChild } from "react";
 import LayoutFooter from "./footer/LayoutFooter.container";
 import LayoutHeader from "./header/LayoutHeader.container";
 
@@ -18,7 +19,10 @@ const Sidebar = styled.div`
 
 const HIDDEN_FOOTER = ["/13-01-layout-hidden"];
 
-export default function Layout(props) {
+interface IProps {
+  children: ReactChild;
+}
+export default function Layout(props: IProps) {
   const router = useRouter();
   const isHiddenFooter = HIDDEN_FOOTER.includes(router.pathname);
 

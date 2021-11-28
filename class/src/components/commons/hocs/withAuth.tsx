@@ -13,5 +13,6 @@ export const withAuth = (Component) => (props) => {
     }
   }, []);
 
+  if (!accessToken) return <div></div>;
   return <Component {...props} />;
 };

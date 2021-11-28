@@ -9,8 +9,8 @@ export default class Board extends BaseEntity {
   writer!: string;
 
   @Column({ type: "text" })
-  contents!: string;
+  title!: string;
 
-  @Column({ type: "timestamp", default: null, nullable: true })
-  deletedAt?: Date;
+  @Column({ type: "integer" })
+  age!: string;
 }

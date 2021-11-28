@@ -1,9 +1,6 @@
 import { Component, createRef } from "react";
 import Router from "next/router";
 
-interface IState {
-  count: number;
-}
 export default class ClassComponentLifecyclePage extends Component {
   // constructor(){
   //     this.state = {
