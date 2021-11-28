@@ -28,17 +28,22 @@ const FETCH_USEDITEM = gql`
 `;
 
 export const getServerSideProps = async (context) => {
+  console.log(context.query.useditemId);
   // 1. graphql 데이터를 요청한다
-  const result = await request(
-    "https://backend03.codebootcamp.co.kr/graphql",
-    FETCH_USEDITEM,
-    { useditemId: context.query.useditemId }
-  );
+  // const result = await request(
+  //   "https://backend03.codebootcamp.co.kr/graphql",
+  //   FETCH_USEDITEM,
+  //   { useditemId: context.query.useditemId }
+  // );
 
   // 2. 요청받은 데이터를 페이지로 넘겨준다
   return {
     props: {
-      fetchUseditem: result.fetchUseditem,
+      fetchUseditem: {
+        name: "성공",
+        remarks: "성공",
+        images: ["성공"],
+      },
     },
   };
 };
